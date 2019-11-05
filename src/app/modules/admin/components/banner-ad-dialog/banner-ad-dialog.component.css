@@ -1,0 +1,13 @@
+.edit__banner__dialog__image {
+  height: 300px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.price-lable {
+  width: 27% !important;
+}
+
+.price-input {
+  width: 67% !important;
+}

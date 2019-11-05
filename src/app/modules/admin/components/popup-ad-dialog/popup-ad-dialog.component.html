@@ -1,0 +1,113 @@
+<div>
+  <div class="card-header bg-dark text-white font-weight-bold rounded-0">
+    Edit Advertisement
+  </div>
+  <form
+    class="px-3 py-2"
+    [formGroup]="PopupAdForm"
+    (ngSubmit)="onPopupAdFormSubmit(editPopupSubmitBtn)"
+    #PopupAdFormRef="ngForm"
+  >
+    <div class="form-group">
+      <p>Click on the image for image selection</p>
+      <img
+        [src]="
+          tempPopupAdImage ||
+          'https://via.placeholder.com/1100x200.png?text=upload+your+banner+here'
+        "
+        alt="Franchise Banner"
+        style="width: 100%; height: 100%;"
+        class="edit__banner__dialog__image"
+        (click)="onEditPopupChooseImage()"
+      />
+      <input
+        type="file"
+        class="form-control ml-3"
+        id="category_name"
+        formControlName="PopupAdImage"
+        style="display:none;"
+        #PopupAdImage
+        (change)="onEditPopupFileChoosen($event)"
+      />
+    </div>
+    <div
+      *ngIf="
+        PopupAdForm.hasError('required', 'PopupAdImage') &&
+        PopupAdFormRef.submitted
+      "
+      class="form-group d-flex justify-content-start align-items-center item-form__input_error"
+    >
+      Image is required
+    </div>
+    <div class="row mt-3">
+      <div class="col-sm-6">
+        <div class="d-flex justify-content-between">
+          <label class="col-sm-3 col-form-label text-dark">Start Time</label>
+          <is-datepicker
+            class="position-relative col-sm-9"
+            formControlName="startTime"
+            placement="top"
+          ></is-datepicker>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="d-flex justify-content-between">
+          <label class="col-sm-3 col-form-label text-dark">End Time</label>
+          <is-datepicker
+            class="position-relative col-sm-9"
+            formControlName="endTime"
+            placement="top"
+          ></is-datepicker>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2 mb-4">
+      <div class="col-sm-5 ">
+        <div class="d-flex justify-content-between">
+          <label
+            for="inputPassword3"
+            class="col-form-label price-lable ml-4 mr-5"
+            >Price</label
+          >
+          <input
+            type="number"
+            class="form-control price-input ml-3"
+            placeholder="Enter Price"
+            formControlName="charges"
+          />
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <div
+          *ngIf="
+            PopupAdForm.hasError('required', 'charges') &&
+            PopupAdFormRef.submitted
+          "
+          class="item-form__input_error d-flex justify-content-start align-items-center mt-1"
+        >
+          <span class="text-danger">Charges are required</span>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button
+        is-button
+        theme="danger"
+        class="close-btn w-25 mb-4 add__category__dialog__btn"
+        type="submit"
+        #editPopupSubmitBtn
+      >
+        <span>Save</span>
+      </button>
+      <button
+        is-button
+        theme="primary"
+        class="close-btn w-25 mb-4 ml-2 add__category__dialog__btn"
+        (click)="isActiveModal.close('cancel')"
+      >
+        <span>Cancel</span>
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,53 @@
+<div *ngIf="loading" class="col h-100 d-flex justify-content-center align-items-center loader-container">
+  <div class="is-loader"></div>
+</div>
+
+<div class="h-100 overflow-hidden" *ngIf="!loading">
+  <header
+    class="container-fluid d-flex align-items-center flex-shrink-0 header w-100 py-3"
+  >
+    <div class="w-100 d-flex justify-content-between align-items-center">
+      <div>
+        <a href="#">
+          <img src="assets/subquch-light-logo.png" class="logo" />
+        </a>
+      </div>
+      <div class="w-25 d-flex justify-content-end align-items-center" (change)="onChangeFranchise($event)">
+        <div class="position-relative">
+            <i class="fa fa-bell text-white mr-4 mt-1 top-icon bell__icon" aria-hidden="true" (click)="onBellIconClicked()" #notificationIcon></i>
+            <is-badge *ngIf="notificationCount > 0"
+                      [count]="notificationCount"
+                      placement="bottom-left"
+                      theme="primary">
+            </is-badge>
+          </div>
+          <is-user-profile
+          [userName]="mainFranchise?.managerName || mainFranchise?.brandName"
+          [image]="mainFranchise?.logo ||'http://www.wpclipart.com/signs_symbol/icons_oversized/male_user_icon.png'">
+          <button class="dropdown-item" (click)="signOut()">
+            <i class="fa fa-sign-out"></i> Sign Out
+          </button>
+        </is-user-profile>
+        <!-- <i class="fas fa-user text-white mr-2 top-icon"></i> -->
+      </div>
+    </div>
+  </header>
+  <div class="h-100 col p-0 d-flex">
+    <is-sidebar
+      [autoGenerateItems]="autoGenerateLinks"
+      [disableButton]="true"
+      [open]="true"
+    >
+    </is-sidebar>
+
+    <main class="col overflow-auto main-content">
+      <!-- <div class="container-fluid mt-2 px-0">
+        <div class="row">
+          <div class="col-md-12"> -->
+            <router-outlet></router-outlet>
+          <!-- </div>
+        </div>
+      </div> -->
+    </main>
+  </div>
+</div>
