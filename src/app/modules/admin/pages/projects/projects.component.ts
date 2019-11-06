@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BuisnessService } from '../../services/buisness.service';
 import { BuisnessModel } from '../../models/buisness.model';
+import { IsModalService } from 'app/lib';
 
 @Component({
   selector: 'projects',
@@ -18,4 +19,7 @@ export class ProjectsComponent implements OnInit {
     })
   }
 
+  onAddBuisnessHandler(){
+
+  }
 }

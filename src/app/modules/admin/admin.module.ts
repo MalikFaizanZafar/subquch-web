@@ -18,6 +18,8 @@ import { UserDetailsComponent } from './pages/user-details/user-details.componen
 import { SliderImageComponent } from './pages/slider-image/slider-image.component';
 import { AdminAuthService } from './services/admin-auth.service';
 import { BuisnessService } from './services/buisness.service';
+import { AddBuisnessDialogComponent } from './components/add-buisness-dialog/add-buisness-dialog.component';
+import { NewProjectPageComponent } from './pages/new-project-page/new-project-page.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { BuisnessService } from './services/buisness.service';
     DashboardComponent,
     ProjectsComponent,
     UserDetailsComponent,
-    SliderImageComponent
+    SliderImageComponent,
+    AddBuisnessDialogComponent,
+    NewProjectPageComponent
   ],
 })
 export class AdminModule { }
