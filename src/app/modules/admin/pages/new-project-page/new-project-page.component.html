@@ -1,3 +1,65 @@
-<p>
-  new-project-page works!
-</p>
+<div class="container-fluid bg-white py-3 h-100">
+  <div class="row px-5 py-5">
+    <div class="col-12 bg-light py-5">
+      <h3 class="text-center">Create A New Project</h3>
+      <form>
+        <div class="row my-1">
+          <div class="col">
+            <label for="exampleFormControlInput1">Project Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Project Name"
+            />
+          </div>
+          <div class="col">
+            <label for="exampleFormControlInput1">Total Worth</label>
+            <input type="text" class="form-control" placeholder="Total Worth" />
+          </div>
+        </div>
+        <div class="row my-1">
+          <div class="col">
+            <label for="exampleFormControlInput1">Disclaimer</label>
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+        <div class="row my-1">
+          <div class="col">
+            <label for="exampleFormControlInput1">Details</label>
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+        <div class="row my-1">
+          <div class="col">
+            <label for="exampleFormControlInput1">Project Images</label>
+            <div class="custom-file">
+              <input
+                type="file"
+                class="custom-file-input"
+                id="validatedCustomFile"
+                required
+              />
+              <label class="custom-file-label" for="validatedCustomFile"
+                >Choose file...</label
+              >
+              <div class="invalid-feedback">
+                Example invalid custom file feedback
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end my-5">
+            <button class="btn btn-primary" style="width: 12%;" type="submit">Finish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

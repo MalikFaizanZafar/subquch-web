@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BuisnessService } from '../../services/buisness.service';
 import { BuisnessModel } from '../../models/buisness.model';
-import { IsModalService } from 'app/lib';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'projects',
@@ -10,7 +10,7 @@ import { IsModalService } from 'app/lib';
 })
 export class ProjectsComponent implements OnInit {
   buisnesses: BuisnessModel[] = [];
-  constructor(private buisnessService : BuisnessService) { }
+  constructor(private buisnessService : BuisnessService, private router : Router, private currentRoute : ActivatedRoute) { }
 
   ngOnInit() {
     this.buisnessService.getBuisnesses().subscribe(res => {
@@ -20,6 +20,6 @@ export class ProjectsComponent implements OnInit {
   }
 
   onAddBuisnessHandler(){
-
+    this.router.navigate(['new'], {relativeTo: this.currentRoute})
   }
 }
