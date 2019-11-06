@@ -17,6 +17,7 @@ import { ProjectsComponent } from './pages/projects/projects.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { SliderImageComponent } from './pages/slider-image/slider-image.component';
 import { AdminAuthService } from './services/admin-auth.service';
+import { BuisnessService } from './services/buisness.service';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { AdminAuthService } from './services/admin-auth.service';
   ],
   providers: [
     AdminAuthService,
+    BuisnessService,
     FranchiseSalesService,
     GoogleMapService,
     UserAuthService,

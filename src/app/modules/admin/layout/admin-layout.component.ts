@@ -6,7 +6,6 @@ import {
   ElementRef
 } from '@angular/core';
 import { Router, Route, ActivatedRoute } from '@angular/router';
-import { MemberDetails } from '../models/vendor-members';
 import { IsModalService, IsModalSize, IsButton } from '../../../lib';
 import { IsToasterService, IsToastPosition } from '../../../lib/toaster';
 import { SidebarLinks } from '../models/sidebar-links';
@@ -22,7 +21,6 @@ import { finalize } from 'rxjs/operators';
 export class AdminLayoutComponent implements OnInit {
   @HostBinding() class: string =
     'd-flex flex-column col p-0 overflow-y-auto overflow-x-hidden';
-  user: MemberDetails;
   editBtnEnabled: boolean;
   notificationCount: number = 0;
   autoGenerateLinks = SidebarLinks;
@@ -56,7 +54,7 @@ export class AdminLayoutComponent implements OnInit {
 
   logoutHandler() {
     localStorage.clear();
-    this.user = {};
+    // this.user = {};
     this.router.navigate(['auth']);
   }
 
