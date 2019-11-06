@@ -2,23 +2,23 @@ import { IsSidebarItemNodes } from "../../../lib/sidebar";
 
 export const SidebarLinks: IsSidebarItemNodes[] = [
   {
-    label: 'Vendors',
-    link: 'vendors'
+    label: 'Dashboard',
+    link: 'dashboard'
   },
   {
-    label: 'Sales',
-    link: 'sales'
+    label: 'Projects',
+    link: 'projects'
   },
   {
-    label: 'Advertisements',
-    link: 'advertisements'
+    label: 'User Details',
+    link: 'user-details'
   },
   {
-    label: 'Settings',
-    link: 'settings'
+    label: 'slider-image',
+    link: 'slider-image'
   },
-  {
-    label: 'Statistics',
-    link: 'stats'
-  }
+  // {
+  //   label: 'Statistics',
+  //   link: 'stats'
+  // }
 ];

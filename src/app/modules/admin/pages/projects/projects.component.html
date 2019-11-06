@@ -37,6 +37,14 @@
           >
             Search
           </button>
+          <button
+            class="ml-2"
+            is-button
+            #searchBtn
+            type="button"
+          >
+            Add New
+          </button>
         </div>
         <is-grid [value]="buisnesses">
           <is-grid-column
@@ -50,7 +58,7 @@
           </is-grid-column>
           <is-grid-column
             field="startDate"
-            header="End Date"
+            header="Start Date"
             styleClass="text-dark"
           >
             <ng-template let-buisness="rowData" isGridTemplate="body">
@@ -74,6 +82,13 @@
           <is-grid-column field="totalWorth" header="Total Worth" styleClass="text-dark">
             <ng-template let-buisness="rowData" isGridTemplate="body">
               <span>{{ buisness.totalWorth}}</span>
+            </ng-template>
+          </is-grid-column>
+          <is-grid-column header="Actions" styleClass="text-dark">
+            <ng-template let-buisness="rowData" isGridTemplate="body">
+                <i class="fa fa-eye text-info mr-2 fa-2x"></i>
+              <i class="fa fa-edit text-warn mr-2 fa-2x"></i>
+              <i class="fa fa-trash text-danger mr-2 fa-2x"></i>
             </ng-template>
           </is-grid-column>
         </is-grid>
