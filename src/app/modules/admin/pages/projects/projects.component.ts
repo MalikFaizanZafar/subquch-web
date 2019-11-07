@@ -15,11 +15,15 @@ export class ProjectsComponent implements OnInit {
   ngOnInit() {
     this.buisnessService.getBuisnesses().subscribe(res => {
       this.buisnesses = res;
-      console.log("this.buisnesses is : ", this.buisnesses);
+      // console.log("this.buisnesses is : ", this.buisnesses);
     })
   }
 
-  onAddBuisnessHandler(){
+  onAddProjectHandler(){
     this.router.navigate(['new'], {relativeTo: this.currentRoute})
+  }
+
+  onViewProjectHandler(id : Number){
+    this.router.navigate([id, 'view'], {relativeTo: this.currentRoute})
   }
 }

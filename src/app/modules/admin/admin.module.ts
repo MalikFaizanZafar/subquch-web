@@ -20,6 +20,7 @@ import { AdminAuthService } from './services/admin-auth.service';
 import { BuisnessService } from './services/buisness.service';
 import { AddBuisnessDialogComponent } from './components/add-buisness-dialog/add-buisness-dialog.component';
 import { NewProjectPageComponent } from './pages/new-project-page/new-project-page.component';
+import { ProjectDetailsPageComponent } from './pages/project-details-page/project-details-page.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { NewProjectPageComponent } from './pages/new-project-page/new-project-pa
     UserDetailsComponent,
     SliderImageComponent,
     AddBuisnessDialogComponent,
-    NewProjectPageComponent
+    NewProjectPageComponent,
+    ProjectDetailsPageComponent
   ],
 })
 export class AdminModule { }
