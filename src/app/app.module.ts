@@ -22,6 +22,7 @@ import { PopupAdDialogComponent } from './modules/admin/components/popup-ad-dial
 import { SliderAdDialogComponent } from './modules/admin/components/slider-ad-dialog/slider-ad-dialog.component';
 import { BannerAdDialogComponent } from './modules/admin/components/banner-ad-dialog/banner-ad-dialog.component';
 import { MobileAdDialogComponent } from './modules/admin/components/mobile-ad-dialog/mobile-ad-dialog.component';
+import { AddBuisnessDialogComponent } from "./modules/admin/components/add-buisness-dialog/add-buisness-dialog.component";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MobileAdDialogComponent } from './modules/admin/components/mobile-ad-di
     PopupAdDialogComponent,
     SliderAdDialogComponent,
     BannerAdDialogComponent,
-    MobileAdDialogComponent
+    MobileAdDialogComponent,
+    AddBuisnessDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -54,7 +56,7 @@ import { MobileAdDialogComponent } from './modules/admin/components/mobile-ad-di
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    NgbDropdownModule
+    NgbDropdownModule,
   ],
   providers: [
     {
@@ -67,7 +69,7 @@ import { MobileAdDialogComponent } from './modules/admin/components/mobile-ad-di
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AdsDialogBoxComponent, PopupAdDialogComponent, SliderAdDialogComponent, BannerAdDialogComponent, MobileAdDialogComponent
+    AddBuisnessDialogComponent, AdsDialogBoxComponent, PopupAdDialogComponent, SliderAdDialogComponent, BannerAdDialogComponent, MobileAdDialogComponent
   ]
 })
 export class AppModule {}

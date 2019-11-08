@@ -18,7 +18,6 @@ import { UserDetailsComponent } from './pages/user-details/user-details.componen
 import { SliderImageComponent } from './pages/slider-image/slider-image.component';
 import { AdminAuthService } from './services/admin-auth.service';
 import { BuisnessService } from './services/buisness.service';
-import { AddBuisnessDialogComponent } from './components/add-buisness-dialog/add-buisness-dialog.component';
 import { NewProjectPageComponent } from './pages/new-project-page/new-project-page.component';
 import { ProjectDetailsPageComponent } from './pages/project-details-page/project-details-page.component';
 
@@ -49,7 +48,6 @@ import { ProjectDetailsPageComponent } from './pages/project-details-page/projec
     ProjectsComponent,
     UserDetailsComponent,
     SliderImageComponent,
-    AddBuisnessDialogComponent,
     NewProjectPageComponent,
     ProjectDetailsPageComponent
   ],
