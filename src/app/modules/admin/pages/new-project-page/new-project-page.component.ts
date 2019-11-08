@@ -64,7 +64,7 @@ export class NewProjectPageComponent implements OnInit {
 
   addBuisnessImageHandler(){
     const buisnessImagesDialog = this.isModalService.open(AddBuisnessDialogComponent, {
-      backdrop: 'static',
+      // backdrop: 'static',
       size: IsModalSize.Large
     })
 
