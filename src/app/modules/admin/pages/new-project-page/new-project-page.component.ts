@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { BuisnessModel } from "./../../models/buisness.model";
 import { BuisnessService } from "../../services/buisness.service";
@@ -12,6 +12,7 @@ import { AddBuisnessDialogComponent } from "../../components/add-buisness-dialog
 })
 export class NewProjectPageComponent implements OnInit {
   buisnessForm: FormGroup;
+  
   constructor(
     private buisnessService: BuisnessService,
     private router: Router,
@@ -61,7 +62,6 @@ export class NewProjectPageComponent implements OnInit {
       }
     );
   }
-
   addBuisnessImageHandler(){
     const buisnessImagesDialog = this.isModalService.open(AddBuisnessDialogComponent, {
       // backdrop: 'static',

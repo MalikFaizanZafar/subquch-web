@@ -1,55 +1,44 @@
-<is-card >
-  <is-card-header class="d-flex justify-content-between w-100 align-items-center">
+<is-card>
+  <is-card-header
+    class="d-flex justify-content-between w-100 align-items-center"
+  >
     Buisness Images
   </is-card-header>
 
   <is-card-content>
-    <div class="container" >
+    <div class="container">
       <!-- <div class="d-flex justify-content-center align-items-center min-content-height" >
         <h3>Click + to add Images</h3>
       </div> -->
       <div class="row">
+        <input type="file" style="display:none;" #imagePicker (change)="fileChangeEvent($event)" />
         <div class="col-12 position-relative">
-          <img src="http://silkbrassband.co.uk/images/no-image-selected.png" alt="" width="100%" height="200px">
-          <i class="fa fa-plus fa-2x position-absolute bg-dark text-white p-1" style="right: 5%; bottom: 5%;"></i>
+          <img
+            [src]="bannerImage.imageUrl"
+            alt=""
+            width="100%"
+            height="200px"
+          />
+          <i
+            class="fa fa-plus fa-2x position-absolute bg-dark text-white p-1"
+            (click)="imageSelectHandler(-1)"
+            style="right: 5%; bottom: 5%;"
+          ></i>
         </div>
       </div>
       <div class="row my-5">
-        <div class="col-4 my-2 position-relative">
-          <img src="http://silkbrassband.co.uk/images/no-image-selected.png" alt="" width="100%" >
-          <i class="fas fa-plus bg-dark position-absolute text-white p-1" style="right: 10%; bottom: 5%;"></i>
-        </div>
-        <div class="col-4 my-2 position-relative">
-          <img src="http://silkbrassband.co.uk/images/no-image-selected.png" alt="" width="100%" >
-          <i class="fas fa-plus bg-dark position-absolute text-white p-1" style="right: 10%; bottom: 5%;"></i>
-        </div>
-        <div class="col-4 my-2 position-relative">
-          <img src="http://silkbrassband.co.uk/images/no-image-selected.png" alt="" width="100%" >
-          <i class="fas fa-plus bg-dark position-absolute text-white p-1" style="right: 10%; bottom: 5%;"></i>
-        </div>
-        <div class="col-4 my-2 position-relative">
-          <img src="http://silkbrassband.co.uk/images/no-image-selected.png" alt="" width="100%" >
-          <i class="fas fa-plus bg-dark position-absolute text-white p-1" style="right: 10%; bottom: 5%;"></i>
-        </div>
-        <div class="col-4 my-2 position-relative">
-          <img src="http://silkbrassband.co.uk/images/no-image-selected.png" alt="" width="100%" >
-          <i class="fas fa-plus bg-dark position-absolute text-white p-1" style="right: 10%; bottom: 5%;"></i>
-        </div>
-        <div class="col-4 my-2 position-relative">
-          <img src="http://silkbrassband.co.uk/images/no-image-selected.png" alt="" width="100%" >
-          <i class="fas fa-plus bg-dark position-absolute text-white p-1" style="right: 10%; bottom: 5%;"></i>
-        </div>
-        <div class="col-4 my-2 position-relative">
-          <img src="http://silkbrassband.co.uk/images/no-image-selected.png" alt="" width="100%" >
-          <i class="fas fa-plus bg-dark position-absolute text-white p-1" style="right: 10%; bottom: 5%;"></i>
-        </div>
-        <div class="col-4 my-2 position-relative">
-          <img src="http://silkbrassband.co.uk/images/no-image-selected.png" alt="" width="100%" >
-          <i class="fas fa-plus bg-dark position-absolute text-white p-1" style="right: 10%; bottom: 5%;"></i>
-        </div>
-        <div class="col-4 my-2 position-relative">
-          <img src="http://silkbrassband.co.uk/images/no-image-selected.png" alt="" width="100%" >
-          <i class="fas fa-plus bg-dark position-absolute text-white p-1" style="right: 10%; bottom: 5%;"></i>
+        <div class="col-4 my-2 position-relative" *ngFor="let image of buisnessImages; let i = index" >
+          <img
+            [src]="image.imageUrl"
+            alt=""
+            width="100%"
+            height="200px"
+          />
+          <i
+            class="fas fa-plus bg-dark position-absolute text-white p-1"
+            style="right: 10%; bottom: 5%;"
+            (click)="imageSelectHandler(i)"
+          ></i>
         </div>
       </div>
       <div class="row my-2">
@@ -60,4 +49,3 @@
     </div>
   </is-card-content>
 </is-card>
-

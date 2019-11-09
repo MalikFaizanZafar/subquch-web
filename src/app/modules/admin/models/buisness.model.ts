@@ -7,8 +7,8 @@ export interface Memeber {
 
 export interface BuisnessImageModel {
   id: number;
-  videoUrl: string;
   imageUrl: string;
+  banner: boolean;
 
 }
 
