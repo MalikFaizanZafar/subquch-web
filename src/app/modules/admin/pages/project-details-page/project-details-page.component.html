@@ -8,7 +8,7 @@
             Project Name :
           </span>
           <span>
-            Easy Insurance
+            {{buisness?.title || 'Project Name'}}
           </span>
         </div>
         <div class="col">
@@ -16,7 +16,7 @@
             Total Worth :
           </span>
           <span>
-            1,000,000
+            {{buisness?.totalWorth || 4000000}}
           </span>
         </div>
       </div>
@@ -24,10 +24,7 @@
         <div class="col">
           <span>Disclaimer</span>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-            aut quod numquam veniam voluptas natus ad omnis qui eos dicta
-            voluptate fugiat, quidem, explicabo commodi cumque illum laborum,
-            quisquam laboriosam!
+            {{buisness?.disclaimer || 'This is disclaimer'}}
           </p>
         </div>
       </div>
@@ -35,10 +32,7 @@
         <div class="col">
           <span>Details</span>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-            aut quod numquam veniam voluptas natus ad omnis qui eos dicta
-            voluptate fugiat, quidem, explicabo commodi cumque illum laborum,
-            quisquam laboriosam!
+           {{buisness?.detailDescription || 'This is description'}}
           </p>
         </div>
       </div>

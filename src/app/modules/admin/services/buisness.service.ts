@@ -23,6 +23,15 @@ export class BuisnessService {
     });
   }
 
+  getBuisness(id: number): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem("Authorization");
+    headers = headers.append("Authorization", token);
+    return this.http.get<any>(`${this.baseURL}/buisness/${id}`, {
+      headers
+    });
+  }
+
   addBuisness(buisness: BuisnessModel): Observable<any> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem("Authorization");
