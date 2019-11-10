@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { BuisnessImageModel } from "../../models/buisness.model";
+import { IsActiveModal } from "app/lib";
 
 @Component({
   selector: "add-buisness-dialog",
@@ -27,26 +28,11 @@ export class AddBuisnessDialogComponent implements OnInit {
       id: 3,
       imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
       banner: false
-    },
-    {
-      id: 4,
-      imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
-      banner: false
-    },
-    {
-      id: 5,
-      imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
-      banner: false
-    },
-    {
-      id: 6,
-      imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
-      banner: false
     }
   ];
   selectedIndex: number = null;
   @ViewChild("imagePicker") imagePicker: ElementRef;
-  constructor() {}
+  constructor(private isActiveModal: IsActiveModal) {}
 
   ngOnInit() {}
 
@@ -58,15 +44,24 @@ export class AddBuisnessDialogComponent implements OnInit {
   fileChangeEvent(fileInput: any) {
     var reader = new FileReader();
     const self = this;
-    reader.onload = function() {
-      var dataURL = reader.result;
-      if(self.selectedIndex > -1){
+    if(this.selectedIndex > -1){
+      reader.onload = function() {
+        var dataURL = reader.result;
         self.buisnessImages[self.selectedIndex].imageUrl = String(dataURL);
-      }else {
+      }
+      reader.readAsDataURL(fileInput.target.files[0]);
+      self.buisnessImages[self.selectedIndex].file = fileInput.target.files[0];
+    }else {
+      reader.onload = function() {
+        var dataURL = reader.result;
         self.bannerImage.imageUrl = String(dataURL);
       }
-    };
-    reader.readAsDataURL(fileInput.target.files[0]);
-    // this.buisnessService.storeBuisnessImages(blob)
+      reader.readAsDataURL(fileInput.target.files[0]);
+      self.bannerImage.file = fileInput.target.files[0];
+    }
+  }
+
+  onSaveHandler(){
+    this.isActiveModal.close({images: [this.bannerImage, ...this.buisnessImages]})
   }
 }

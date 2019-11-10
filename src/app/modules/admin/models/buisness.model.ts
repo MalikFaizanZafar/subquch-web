@@ -6,9 +6,10 @@ export interface Memeber {
 }
 
 export interface BuisnessImageModel {
-  id: number;
+  id?: number;
   imageUrl: string;
   banner: boolean;
+  file?: any;
 
 }
 

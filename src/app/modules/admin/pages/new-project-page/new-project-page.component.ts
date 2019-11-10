@@ -1,5 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { AngularFireStorage } from "@angular/fire/storage";
+import { Observable } from "rxjs";
+import { finalize } from "rxjs/operators";
 import { BuisnessModel } from "./../../models/buisness.model";
 import { BuisnessService } from "../../services/buisness.service";
 import { IsButton, IsModalService, IsModalSize } from "app/lib";
@@ -12,11 +15,14 @@ import { AddBuisnessDialogComponent } from "../../components/add-buisness-dialog
 })
 export class NewProjectPageComponent implements OnInit {
   buisnessForm: FormGroup;
-  
+  newBuisness: BuisnessModel;
+  images: any[] = [];
+  downloadURL: Observable<string>;
   constructor(
     private buisnessService: BuisnessService,
     private router: Router,
-    private isModalService: IsModalService
+    private isModalService: IsModalService,
+    private storage: AngularFireStorage
   ) {}
 
   ngOnInit() {
@@ -36,40 +42,83 @@ export class NewProjectPageComponent implements OnInit {
     var reader = new FileReader();
     reader.onload = function() {
       var dataURL = reader.result;
-      console.log('dataURL : ', dataURL);
+      console.log("dataURL : ", dataURL);
     };
     reader.readAsDataURL(fileInput.target.files[0]);
-    console.log('reader : ', reader);
+    console.log("reader : ", reader);
   }
 
   onBuisnessFormSubmit(btn: IsButton) {
+    console.log("this.images : ", this.images);
     btn.startLoading();
     let formValues = this.buisnessForm.value;
-    let newBuisness: BuisnessModel = formValues;
-    newBuisness.remainingShares = 0;
-    newBuisness.logoUrl = "";
-    newBuisness.enabled = false;
-    newBuisness.images = [];
-    console.log("newBuisness ", newBuisness);
-    this.buisnessService.addBuisness(newBuisness).subscribe(
-      res => {
-        console.log("res is : ", res);
-        btn.stopLoading();
-        this.router.navigate(["admin", "projects"]);
-      },
-      err => {
-        btn.stopLoading();
+    this.newBuisness = formValues;
+    this.newBuisness.remainingShares = 0;
+    this.newBuisness.logoUrl = "";
+    this.newBuisness.enabled = false;
+    // this.newBuisness.images = [];
+    this.uploadImagesToFireStorage(this.images);
+    console.log("newBuisness ", this.newBuisness);
+    // this.buisnessService.addBuisness(this.newBuisness).subscribe(
+    //   res => {
+    //     console.log("res is : ", res);
+    //     btn.stopLoading();
+    //     this.router.navigate(["admin", "projects"]);
+    //   },
+    //   err => {
+    //     btn.stopLoading();
+    //   }
+    // );
+  }
+  addBuisnessImageHandler() {
+    const buisnessImagesDialog = this.isModalService.open(
+      AddBuisnessDialogComponent,
+      {
+        backdrop: "static",
+        size: IsModalSize.Large
       }
     );
+    let self = this;
+    buisnessImagesDialog.onClose.subscribe(res => {
+      if (res !== "cancel") {
+        // console.log("res : ", res);
+        // console.log("self images ", self.images);
+        self.images = res.images;
+        console.log("self images(2) ", self.images);
+      }
+    });
   }
-  addBuisnessImageHandler(){
-    const buisnessImagesDialog = this.isModalService.open(AddBuisnessDialogComponent, {
-      // backdrop: 'static',
-      size: IsModalSize.Large
-    })
 
-    // buisnessImagesDialog.onClose.subscribe(res => {
-    //   if(res !== 'cancel' )
-    // })
+  uploadImagesToFireStorage(images: any[]) {
+    this.newBuisness.images = [];
+    images.map((image, i) => {
+      if (image.file != undefined) {
+        let randomString =
+          Math.random()
+            .toString(36)
+            .substring(2, 15) +
+          Math.random()
+            .toString(36)
+            .substring(2, 15);
+        const filePath = "projects/" + randomString + "-" + image.file.name;
+        const fileRef = this.storage.ref(filePath);
+        const task = this.storage.upload(filePath, image.file);
+        task
+          .snapshotChanges()
+          .pipe(
+            finalize(() => {
+              this.downloadURL = fileRef.getDownloadURL();
+              this.downloadURL.subscribe(url => {
+                this.newBuisness.images.push({
+                  imageUrl: url,
+                  banner: i == 0 ? true : false
+                });
+                console.log("this.newBuisness ", this.newBuisness);
+              });
+            })
+          )
+          .subscribe();
+      }
+    });
   }
 }
