@@ -91,7 +91,7 @@
             <ng-template let-buisness="rowData" isGridTemplate="body">
               <i class="fa fa-eye text-info mr-2 fa-2x" (click)="onViewProjectHandler(buisness.id)"></i>
               <i class="fa fa-edit text-warn mr-2 fa-2x"></i>
-              <i class="fa fa-trash text-danger mr-2 fa-2x"></i>
+              <i class="fa fa-trash text-danger mr-2 fa-2x" (click)="onDeleteProjectHandler(buisness.id)"></i>
             </ng-template>
           </is-grid-column>
         </is-grid>
