@@ -58,6 +58,15 @@ export class BuisnessService {
     });
   }
 
+  editBuisness(buisness: BuisnessModel, id: number): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem("Authorization");
+    headers = headers.append("Authorization", token);
+    return this.http.put<any>(`${this.baseURL}/buisness/${id}`, buisness, {
+      headers
+    });
+  }
+
   storeBuisnessImages(imageBlob: any) {
     let imageStorageUrl: String = '';
     let randomString =

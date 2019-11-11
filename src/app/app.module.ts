@@ -24,6 +24,7 @@ import { BannerAdDialogComponent } from './modules/admin/components/banner-ad-di
 import { MobileAdDialogComponent } from './modules/admin/components/mobile-ad-dialog/mobile-ad-dialog.component';
 import { AddBuisnessDialogComponent } from "./modules/admin/components/add-buisness-dialog/add-buisness-dialog.component";
 import { DeleteBuisnessDialogComponent } from "./modules/admin/components/delete-buisness-dialog/delete-buisness-dialog.component";
+import { EditBuisnessDialogComponent } from "./modules/admin/components/edit-buisness-dialog/edit-buisness-dialog.component";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DeleteBuisnessDialogComponent } from "./modules/admin/components/delete
     BannerAdDialogComponent,
     MobileAdDialogComponent,
     AddBuisnessDialogComponent,
+    EditBuisnessDialogComponent,
     DeleteBuisnessDialogComponent
   ],
   imports: [
@@ -71,7 +73,7 @@ import { DeleteBuisnessDialogComponent } from "./modules/admin/components/delete
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AddBuisnessDialogComponent, DeleteBuisnessDialogComponent, AdsDialogBoxComponent, PopupAdDialogComponent, SliderAdDialogComponent, BannerAdDialogComponent, MobileAdDialogComponent
+    AddBuisnessDialogComponent,EditBuisnessDialogComponent, DeleteBuisnessDialogComponent, AdsDialogBoxComponent, PopupAdDialogComponent, SliderAdDialogComponent, BannerAdDialogComponent, MobileAdDialogComponent
   ]
 })
 export class AppModule {}

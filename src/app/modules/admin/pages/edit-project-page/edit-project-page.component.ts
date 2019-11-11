@@ -8,6 +8,7 @@ import { BuisnessService } from "../../services/buisness.service";
 import { IsButton, IsModalService, IsModalSize } from "app/lib";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AddBuisnessDialogComponent } from "../../components/add-buisness-dialog/add-buisness-dialog.component";
+import { EditBuisnessDialogComponent } from "../../components/edit-buisness-dialog/edit-buisness-dialog.component";
 @Component({
   selector: "edit-project-page",
   templateUrl: "./edit-project-page.component.html",
@@ -15,7 +16,8 @@ import { AddBuisnessDialogComponent } from "../../components/add-buisness-dialog
 })
 export class EditProjectPageComponent implements OnInit {
   buisnessForm: FormGroup;
-  newBuisness: BuisnessModel;
+  buisness: BuisnessModel;
+  editedBuisness: BuisnessModel;
   images: any[] = [];
   downloadURL: Observable<string>;
   constructor(
@@ -29,17 +31,16 @@ export class EditProjectPageComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.buisnessService.getBuisness(params['id']).subscribe(res => {
-        let buisness = res;
-        console.log("buisness : ", buisness)
+        this.buisness = res;
         this.buisnessForm = new FormGroup({
-          title: new FormControl(buisness.title, [Validators.required]),
-          totalWorth: new FormControl(buisness.totalWorth, [Validators.required]),
-          monthlyWorth: new FormControl(buisness.monthlyWorth, [Validators.required]),
-          startDate: new FormControl(buisness.startDate, [Validators.required]),
-          endDate: new FormControl(buisness.endDate, [Validators.required]),
-          disclaimer: new FormControl(buisness.disclaimer, [Validators.required]),
-          summary: new FormControl(buisness.summary, [Validators.required]),
-          detailDescription: new FormControl(buisness.detailDescription, [Validators.required])
+          title: new FormControl(this.buisness.title, [Validators.required]),
+          totalWorth: new FormControl(this.buisness.totalWorth, [Validators.required]),
+          monthlyWorth: new FormControl(this.buisness.monthlyWorth, [Validators.required]),
+          startDate: new FormControl(this.buisness.startDate, [Validators.required]),
+          endDate: new FormControl(this.buisness.endDate, [Validators.required]),
+          disclaimer: new FormControl(this.buisness.disclaimer, [Validators.required]),
+          summary: new FormControl(this.buisness.summary, [Validators.required]),
+          detailDescription: new FormControl(this.buisness.detailDescription, [Validators.required])
         });
       })
     })
@@ -56,49 +57,37 @@ export class EditProjectPageComponent implements OnInit {
   }
 
   onBuisnessFormSubmit(btn: IsButton) {
-    console.log("this.images : ", this.images);
-    btn.startLoading();
     let formValues = this.buisnessForm.value;
-    this.newBuisness = formValues;
-    this.newBuisness.remainingShares = 0;
-    this.newBuisness.logoUrl = "";
-    this.newBuisness.enabled = false;
+    this.editedBuisness = formValues;
+    this.editedBuisness.remainingShares = 0;
+    this.editedBuisness.logoUrl = "";
+    this.editedBuisness.enabled = true;
     // this.newBuisness.images = [];
-    this.uploadImagesToFireStorage(this.images);
-    console.log("newBuisness ", this.newBuisness);
-    // this.buisnessService.addBuisness(this.newBuisness).subscribe(
-    //   res => {
-    //     console.log("res is : ", res);
-    //     btn.stopLoading();
-    //     this.router.navigate(["admin", "projects"]);
-    //   },
-    //   err => {
-    //     btn.stopLoading();
-    //   }
-    // );
+    this.uploadImagesToFireStorage(this.images,btn);
+    console.log("editedBuisness ", this.editedBuisness);
   }
   addBuisnessImageHandler(e:any) {
     e.preventDefault();
     const buisnessImagesDialog = this.isModalService.open(
-      AddBuisnessDialogComponent,
+      EditBuisnessDialogComponent,
       {
         backdrop: "static",
-        size: IsModalSize.Large
+        size: IsModalSize.Large,
+        data: this.buisness.images
       }
     );
     let self = this;
     buisnessImagesDialog.onClose.subscribe(res => {
       if (res !== "cancel") {
-        // console.log("res : ", res);
-        // console.log("self images ", self.images);
         self.images = res.images;
         console.log("self images(2) ", self.images);
       }
     });
   }
 
-  uploadImagesToFireStorage(images: any[]) {
-    this.newBuisness.images = [];
+  uploadImagesToFireStorage(images: any[], btn: IsButton) {
+    btn.startLoading();
+    this.editedBuisness.images = images.filter(i => i.file == undefined)
     images.map((image, i) => {
       if (image.file != undefined) {
         let randomString =
@@ -117,11 +106,22 @@ export class EditProjectPageComponent implements OnInit {
             finalize(() => {
               this.downloadURL = fileRef.getDownloadURL();
               this.downloadURL.subscribe(url => {
-                this.newBuisness.images.push({
+                this.editedBuisness.images.push({
                   imageUrl: url,
                   banner: i == 0 ? true : false
                 });
-                console.log("this.newBuisness ", this.newBuisness);
+                if(images.length == i+1){
+                  this.buisnessService.editBuisness(this.editedBuisness,this.buisness.id).subscribe(
+                    res => {
+                      console.log("res(editedBuisness) is : ", res);
+                      btn.stopLoading();
+                      this.router.navigate(["admin", "projects"]);
+                    },
+                    err => {
+                      btn.stopLoading();
+                    }
+                  );
+                }
               });
             })
           )
