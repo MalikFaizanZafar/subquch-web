@@ -49,27 +49,14 @@ export class NewProjectPageComponent implements OnInit {
   }
 
   onBuisnessFormSubmit(btn: IsButton) {
-    console.log("this.images : ", this.images);
-    btn.startLoading();
     let formValues = this.buisnessForm.value;
     this.newBuisness = formValues;
     this.newBuisness.remainingShares = 0;
     this.newBuisness.logoUrl = "";
-    this.newBuisness.enabled = false;
-    // this.newBuisness.images = [];
-    this.uploadImagesToFireStorage(this.images);
-    console.log("newBuisness ", this.newBuisness);
-    // this.buisnessService.addBuisness(this.newBuisness).subscribe(
-    //   res => {
-    //     console.log("res is : ", res);
-    //     btn.stopLoading();
-    //     this.router.navigate(["admin", "projects"]);
-    //   },
-    //   err => {
-    //     btn.stopLoading();
-    //   }
-    // );
+    this.newBuisness.enabled = true;
+    this.addBuisnessHandler(this.images, btn)
   }
+
   addBuisnessImageHandler(e:any) {
     e.preventDefault();
     const buisnessImagesDialog = this.isModalService.open(
@@ -82,15 +69,14 @@ export class NewProjectPageComponent implements OnInit {
     let self = this;
     buisnessImagesDialog.onClose.subscribe(res => {
       if (res !== "cancel") {
-        // console.log("res : ", res);
-        // console.log("self images ", self.images);
         self.images = res.images;
         console.log("self images(2) ", self.images);
       }
     });
   }
 
-  uploadImagesToFireStorage(images: any[]) {
+  addBuisnessHandler(images: any[], btn: IsButton) {
+    btn.startLoading();
     this.newBuisness.images = [];
     images.map((image, i) => {
       if (image.file != undefined) {
@@ -114,7 +100,19 @@ export class NewProjectPageComponent implements OnInit {
                   imageUrl: url,
                   banner: i == 0 ? true : false
                 });
-                console.log("this.newBuisness ", this.newBuisness);
+                if(images.length == i+1){
+                  console.log("this.newBuisness ", this.newBuisness);
+                  this.buisnessService.addBuisness(this.newBuisness).subscribe(
+                  res => {
+                    console.log("res is : ", res);
+                    btn.stopLoading();
+                    this.router.navigate(["admin", "projects"]);
+                  },
+                  err => {
+                    btn.stopLoading();
+                  }
+                );
+                }
               });
             })
           )

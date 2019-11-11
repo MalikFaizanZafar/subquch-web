@@ -60,7 +60,13 @@ export class AddBuisnessDialogComponent implements OnInit {
       self.bannerImage.file = fileInput.target.files[0];
     }
   }
-
+  onAddImage(){
+    this.buisnessImages.push({
+      id: 1,
+      imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
+      banner: false
+    })
+  }
   onSaveHandler(){
     this.isActiveModal.close({images: [this.bannerImage, ...this.buisnessImages]})
   }
