@@ -6,14 +6,14 @@ import { finalize } from "rxjs/operators";
 import { BuisnessModel } from "./../../models/buisness.model";
 import { BuisnessService } from "../../services/buisness.service";
 import { IsButton, IsModalService, IsModalSize } from "app/lib";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { AddBuisnessDialogComponent } from "../../components/add-buisness-dialog/add-buisness-dialog.component";
 @Component({
-  selector: "new-project-page",
-  templateUrl: "./new-project-page.component.html",
-  styleUrls: ["./new-project-page.component.css"]
+  selector: "edit-project-page",
+  templateUrl: "./edit-project-page.component.html",
+  styleUrls: ["./edit-project-page.component.css"]
 })
-export class NewProjectPageComponent implements OnInit {
+export class EditProjectPageComponent implements OnInit {
   buisnessForm: FormGroup;
   newBuisness: BuisnessModel;
   images: any[] = [];
@@ -21,21 +21,28 @@ export class NewProjectPageComponent implements OnInit {
   constructor(
     private buisnessService: BuisnessService,
     private router: Router,
+    private route: ActivatedRoute,
     private isModalService: IsModalService,
     private storage: AngularFireStorage
   ) {}
 
   ngOnInit() {
-    this.buisnessForm = new FormGroup({
-      title: new FormControl(null, [Validators.required]),
-      totalWorth: new FormControl(null, [Validators.required]),
-      monthlyWorth: new FormControl(null, [Validators.required]),
-      startDate: new FormControl(null, [Validators.required]),
-      endDate: new FormControl(null, [Validators.required]),
-      disclaimer: new FormControl(null, [Validators.required]),
-      summary: new FormControl(null, [Validators.required]),
-      detailDescription: new FormControl(null, [Validators.required])
-    });
+    this.route.params.subscribe(params => {
+      this.buisnessService.getBuisness(params['id']).subscribe(res => {
+        let buisness = res;
+        console.log("buisness : ", buisness)
+        this.buisnessForm = new FormGroup({
+          title: new FormControl(buisness.title, [Validators.required]),
+          totalWorth: new FormControl(buisness.totalWorth, [Validators.required]),
+          monthlyWorth: new FormControl(buisness.monthlyWorth, [Validators.required]),
+          startDate: new FormControl(buisness.startDate, [Validators.required]),
+          endDate: new FormControl(buisness.endDate, [Validators.required]),
+          disclaimer: new FormControl(buisness.disclaimer, [Validators.required]),
+          summary: new FormControl(buisness.summary, [Validators.required]),
+          detailDescription: new FormControl(buisness.detailDescription, [Validators.required])
+        });
+      })
+    })
   }
 
   fileChangeEvent(fileInput: any) {

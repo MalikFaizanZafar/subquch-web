@@ -8,6 +8,7 @@ import { UserDetailsComponent } from './pages/user-details/user-details.componen
 import { SliderImageComponent } from './pages/slider-image/slider-image.component';
 import { NewProjectPageComponent } from './pages/new-project-page/new-project-page.component';
 import { ProjectDetailsPageComponent } from './pages/project-details-page/project-details-page.component';
+import { EditProjectPageComponent } from './pages/edit-project-page/edit-project-page.component';
 
 const routes: Routes = [
   { path: '', component: AdminLayoutComponent, children: [
@@ -15,6 +16,7 @@ const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent},
     { path: 'projects', component: ProjectsComponent},
     { path: 'projects/:id/view', component: ProjectDetailsPageComponent},
+    { path: 'projects/:id/edit', component: EditProjectPageComponent},
     { path: 'projects/new', component: NewProjectPageComponent},
     { path: 'user-details', component: UserDetailsComponent},
     { path: 'slider-image', component: SliderImageComponent},

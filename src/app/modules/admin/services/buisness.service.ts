@@ -23,6 +23,15 @@ export class BuisnessService {
     });
   }
 
+  searchBuisnesses(key: string): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem("Authorization");
+    headers = headers.append("Authorization", token);
+    return this.http.get<any>(`${this.baseURL}/buisness?title=${key}`, {
+      headers
+    });
+  }
+
   getBuisness(id: number): Observable<any> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem("Authorization");
@@ -31,7 +40,6 @@ export class BuisnessService {
       headers
     });
   }
-
   deleteBuisness(id: number): Observable<any> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem("Authorization");
