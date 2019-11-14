@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AngularFireStorage } from "@angular/fire/storage";
 import { Observable } from "rxjs";
@@ -17,7 +17,10 @@ export class NewProjectPageComponent implements OnInit {
   buisnessForm: FormGroup;
   newBuisness: BuisnessModel;
   images: any[] = [];
+  imageFileName: string = "";
+  logoImageFile: any;
   downloadURL: Observable<string>;
+  @ViewChild('logoPicker') logoPicker:ElementRef;
   constructor(
     private buisnessService: BuisnessService,
     private router: Router,
@@ -43,9 +46,12 @@ export class NewProjectPageComponent implements OnInit {
     reader.onload = function() {
       var dataURL = reader.result;
       console.log("dataURL : ", dataURL);
+      // self.logoImageFile = dataURL
     };
     reader.readAsDataURL(fileInput.target.files[0]);
     console.log("reader : ", reader);
+    this.logoImageFile = fileInput.target.files[0]
+    this.imageFileName = fileInput.target.files[0].name;
   }
 
   onBuisnessFormSubmit(btn: IsButton) {
@@ -54,6 +60,11 @@ export class NewProjectPageComponent implements OnInit {
     this.newBuisness.remainingShares = 0;
     this.newBuisness.logoUrl = "";
     this.newBuisness.enabled = true;
+    this.images.push({
+      imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
+      banner: false,
+      file: this.logoImageFile
+    })
     this.addBuisnessHandler(this.images, btn)
   }
 
@@ -74,7 +85,10 @@ export class NewProjectPageComponent implements OnInit {
       }
     });
   }
-
+  pickLogoHandler(e:any){
+    e.preventDefault();
+    this.logoPicker.nativeElement.click();
+  }
   addBuisnessHandler(images: any[], btn: IsButton) {
     btn.startLoading();
     this.newBuisness.images = [];
@@ -101,6 +115,7 @@ export class NewProjectPageComponent implements OnInit {
                   banner: i == 0 ? true : false
                 });
                 if(images.length == i+1){
+                  this.newBuisness.logoUrl = url;
                   console.log("this.newBuisness ", this.newBuisness);
                   this.buisnessService.addBuisness(this.newBuisness).subscribe(
                   res => {

@@ -122,6 +122,17 @@
               >
                 Select Images
               </button>
+              <input type="file" style="display:none;" #logoPicker (change)="fileChangeEvent($event)" />
+              <button
+                  class="btn btn-primary ml-3"
+                  style="width: 12%;"
+                  (click)="pickLogoHandler($event)"
+                >
+              Pick Logo
+            </button>
+            <span *ngIf="imageFileName != ''">
+              {{imageFileName}}
+            </span>
             </div>
           </div>
         </div>

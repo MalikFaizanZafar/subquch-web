@@ -62,7 +62,6 @@ export class EditProjectPageComponent implements OnInit {
     this.editedBuisness.remainingShares = 0;
     this.editedBuisness.logoUrl = "";
     this.editedBuisness.enabled = true;
-    // this.newBuisness.images = [];
     this.uploadImagesToFireStorage(this.images,btn);
     console.log("editedBuisness ", this.editedBuisness);
   }

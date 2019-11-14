@@ -18,16 +18,6 @@ export class AddBuisnessDialogComponent implements OnInit {
       id: 1,
       imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
       banner: false
-    },
-    {
-      id: 2,
-      imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
-      banner: false
-    },
-    {
-      id: 3,
-      imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
-      banner: false
     }
   ];
   selectedIndex: number = null;
