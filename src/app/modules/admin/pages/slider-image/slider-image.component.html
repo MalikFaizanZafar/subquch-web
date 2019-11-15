@@ -11,7 +11,7 @@
         <input type="file" style="display:none;" #imagePicker (change)="fileChangeEvent($event)" />
       </div>
       <div class="row my-5">
-        <div class="col-4 my-2 position-relative" *ngFor="let image of buisnessImages; let i = index" >
+        <div class="col-4 my-2 position-relative" *ngFor="let image of sliderImages; let i = index" >
           <img
             [src]="image.imageUrl"
             alt=""
@@ -22,6 +22,12 @@
             class="fas fa-plus bg-dark position-absolute text-white p-1"
             style="right: 10%; bottom: 5%;"
             (click)="imageSelectHandler(i)"
+          ></i>
+          <i
+            class="fas fa-trash bg-dark position-absolute text-white p-1"
+            style="right: 15%; bottom: 5%;"
+            (click)="deleteImageHandler(i)"
+            *ngIf="image.imageUrl != 'http://silkbrassband.co.uk/images/no-image-selected.png'"
           ></i>
         </div>
       </div>

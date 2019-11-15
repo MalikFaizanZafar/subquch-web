@@ -8,16 +8,16 @@ import { IsActiveModal } from "app/lib";
   styleUrls: ["./slider-image.component.css"]
 })
 export class SliderImageComponent implements OnInit {
-  bannerImage: BuisnessImageModel = {
+  sliderImage: BuisnessImageModel = {
     id: 0,
     imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
-    banner: true
+    edited: false
   };
-  buisnessImages: BuisnessImageModel[] = [
+  sliderImages: BuisnessImageModel[] = [
     {
       id: 1,
       imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
-      banner: false
+      edited: false
     }
   ];
   selectedIndex: number = null;
@@ -37,24 +37,27 @@ export class SliderImageComponent implements OnInit {
     if (this.selectedIndex > -1) {
       reader.onload = function() {
         var dataURL = reader.result;
-        self.buisnessImages[self.selectedIndex].imageUrl = String(dataURL);
+        self.sliderImages[self.selectedIndex].imageUrl = String(dataURL);
       };
       reader.readAsDataURL(fileInput.target.files[0]);
-      self.buisnessImages[self.selectedIndex].file = fileInput.target.files[0];
+      self.sliderImages[self.selectedIndex].file = fileInput.target.files[0];
     } else {
       reader.onload = function() {
         var dataURL = reader.result;
-        self.bannerImage.imageUrl = String(dataURL);
+        self.sliderImage.imageUrl = String(dataURL);
       };
       reader.readAsDataURL(fileInput.target.files[0]);
-      self.bannerImage.file = fileInput.target.files[0];
+      self.sliderImage.file = fileInput.target.files[0];
     }
   }
   onAddImage() {
-    this.buisnessImages.push({
-      id: 1,
+    this.sliderImages.push({
       imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
-      banner: false
+      edited: false
     });
+  }
+
+  deleteImageHandler(index : number){
+    this.sliderImages.splice(index, 1)
   }
 }

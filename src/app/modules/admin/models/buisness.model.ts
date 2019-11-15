@@ -8,8 +8,9 @@ export interface Memeber {
 export interface BuisnessImageModel {
   id?: number;
   imageUrl: string;
-  banner: boolean;
+  banner?: boolean;
   file?: any;
+  edited?:boolean;
 
 }
 
