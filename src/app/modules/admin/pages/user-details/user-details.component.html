@@ -1,3 +1,67 @@
-<p>
-  user-details works!
-</p>
+<!-- <div
+  *ngIf="loading"
+  class="col h-100 d-flex justify-content-center align-items-center loader-container"
+>
+  <div class="is-loader"></div>
+  <h6 class="ml-2">Loading Sales</h6>
+</div> -->
+<div>
+  <is-card>
+    <is-card-header>
+      <h4>Users</h4>
+    </is-card-header>
+    <is-card-content>
+      <div class="w-100">
+        <div class="d-flex justify-content-end ">
+          <div class="d-flex align-items-center">
+              <input
+                type="tesxt"
+                class="form-control"
+                style="height:35px;"
+                placeholder="Enter user name"
+                (keyup)="onSearchKeyUp($event)"
+                
+              />
+          </div>
+          <button class="ml-2" is-button #searchBtn type="button" (click)="onSearchProjectHandler(searchBtn)">
+            Search
+          </button>
+        </div>
+        <is-grid [value]="users">
+          <is-grid-column field="firsName" header="First Name" styleClass="text-dark">
+            <ng-template let-user="rowData" isGridTemplate="body">
+              <span>{{ user.firstName }}</span>
+            </ng-template>
+          </is-grid-column>
+          <is-grid-column
+            field="lastName"
+            header="Last Name"
+            styleClass="text-dark"
+          >
+            <ng-template let-user="rowData" isGridTemplate="body">
+              <span>{{ user.lastName}}</span>
+            </ng-template>
+          </is-grid-column>
+          <is-grid-column
+            field="email"
+            header="Email"
+            styleClass="text-dark"
+          >
+            <ng-template let-user="rowData" isGridTemplate="body">
+              <span>{{ user.email }}</span>
+            </ng-template>
+          </is-grid-column>
+          <is-grid-column
+            field="phone"
+            header="Phone"
+            styleClass="text-dark"
+          >
+            <ng-template let-user="rowData" isGridTemplate="body">
+              <span>{{ user.phone }}</span>
+            </ng-template>
+          </is-grid-column>
+        </is-grid>
+      </div>
+    </is-card-content>
+  </is-card>
+</div>

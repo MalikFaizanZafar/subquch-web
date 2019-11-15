@@ -16,6 +16,9 @@ export class AdminAuthService {
     return this.http.post<any>(`${this.baseURL}/signin`, {"email": email, "password": password})
   }
 
+  getAllUsers(): Observable<any>{
+    return this.http.get<any>(`${this.baseURL}`)
+  }
   forgotEmailPost(data: any) : Observable<any>{
     return this.http.post<any>(`${this.baseURL}/forgot-password`, data);
   }
