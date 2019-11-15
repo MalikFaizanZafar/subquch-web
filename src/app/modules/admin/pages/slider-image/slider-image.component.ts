@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { BuisnessImageModel } from "../../models/buisness.model";
-import { IsActiveModal } from "app/lib";
+import { AngularFireStorage } from "@angular/fire/storage";
+import { Observable } from "rxjs";
+import { finalize } from "rxjs/operators";
 
 @Component({
   selector: "slider-image",
@@ -21,8 +23,9 @@ export class SliderImageComponent implements OnInit {
     }
   ];
   selectedIndex: number = null;
+  downloadURL: Observable<string>;
   @ViewChild("imagePicker") imagePicker: ElementRef;
-  constructor() {}
+  constructor(private storage: AngularFireStorage) {}
 
   ngOnInit() {}
 
@@ -57,10 +60,35 @@ export class SliderImageComponent implements OnInit {
     });
   }
 
-  deleteImageHandler(index : number){
-    this.sliderImages.splice(index, 1)
+  deleteImageHandler(index: number) {
+    this.sliderImages.splice(index, 1);
   }
-  onSaveHandler(){
+  onSaveHandler() {
     console.log("images : ", this.sliderImages);
+    this.sliderImages.map((image, i) => {
+      if (image.file != undefined) {
+        let randomString =
+          Math.random()
+            .toString(36)
+            .substring(2, 15) +
+          Math.random()
+            .toString(36)
+            .substring(2, 15);
+        const filePath = "slider-images/" + randomString + "-" + image.file.name;
+        const fileRef = this.storage.ref(filePath);
+        const task = this.storage.upload(filePath, image.file);
+        task
+          .snapshotChanges()
+          .pipe(
+            finalize(() => {
+              this.downloadURL = fileRef.getDownloadURL();
+              this.downloadURL.subscribe(url => {
+                console.log(`url(${i}) is : `, url)
+              });
+            })
+          )
+          .subscribe();
+      }
+    });
   }
 }
