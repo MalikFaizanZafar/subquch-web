@@ -60,4 +60,7 @@ export class SliderImageComponent implements OnInit {
   deleteImageHandler(index : number){
     this.sliderImages.splice(index, 1)
   }
+  onSaveHandler(){
+    console.log("images : ", this.sliderImages);
+  }
 }
