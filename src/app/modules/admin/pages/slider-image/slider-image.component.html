@@ -38,7 +38,7 @@
       </div>
       <div class="row my-2">
         <div class="col-2 offset-10 d-flex justify-content-center">
-          <button class=" btn-success btn btn-primary" style="width:200px;" (click)="onSaveHandler()" >Save</button>
+          <button [disabled]="addMoreBtnDisabled" class=" btn-success btn btn-primary" is-button #saveBtn style="width:200px;" (click)="onSaveHandler(saveBtn)" >Save</button>
         </div>
       </div>
     </div>

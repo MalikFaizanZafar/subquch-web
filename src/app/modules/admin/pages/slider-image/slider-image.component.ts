@@ -3,6 +3,8 @@ import { BuisnessImageModel } from "../../models/buisness.model";
 import { AngularFireStorage } from "@angular/fire/storage";
 import { Observable } from "rxjs";
 import { finalize } from "rxjs/operators";
+import { SliderService } from "../../services/image-slider.service";
+import { IsButton } from "app/lib";
 
 @Component({
   selector: "slider-image",
@@ -23,11 +25,16 @@ export class SliderImageComponent implements OnInit {
     }
   ];
   selectedIndex: number = null;
+  addMoreBtnDisabled: boolean = true;
   downloadURL: Observable<string>;
   @ViewChild("imagePicker") imagePicker: ElementRef;
-  constructor(private storage: AngularFireStorage) {}
+  constructor(private storage: AngularFireStorage, private sliderService: SliderService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.sliderService.getImages().subscribe(res => {
+      this.sliderImages = res.map(obj=> ({ ...obj, edited: false }));
+    })
+  }
 
   imageSelectHandler(index: number) {
     this.selectedIndex = index;
@@ -51,6 +58,7 @@ export class SliderImageComponent implements OnInit {
       };
       reader.readAsDataURL(fileInput.target.files[0]);
       self.sliderImage.file = fileInput.target.files[0];
+      this.addMoreBtnDisabled = false;
     }
   }
   onAddImage() {
@@ -61,10 +69,13 @@ export class SliderImageComponent implements OnInit {
   }
 
   deleteImageHandler(index: number) {
-    this.sliderImages.splice(index, 1);
+    this.sliderService.deleteImage(this.sliderImages[index].id).subscribe(res => {
+      this.sliderImages.splice(index, 1);
+    })
   }
-  onSaveHandler() {
-    console.log("images : ", this.sliderImages);
+  onSaveHandler(btn: IsButton) {
+    btn.startLoading();
+    let imagesList = []
     this.sliderImages.map((image, i) => {
       if (image.file != undefined) {
         let randomString =
@@ -83,7 +94,14 @@ export class SliderImageComponent implements OnInit {
             finalize(() => {
               this.downloadURL = fileRef.getDownloadURL();
               this.downloadURL.subscribe(url => {
-                console.log(`url(${i}) is : `, url)
+                imagesList.push(url)
+                if(imagesList.length == this.sliderImages.length){
+                  this.sliderService.saveImages(imagesList).subscribe(imageRes => {
+                    console.log("imageRes : ", imageRes);
+                    this.sliderImages = imageRes.map(obj=> ({ ...obj, edited: false }));
+                    btn.stopLoading();
+                  })
+                }
               });
             })
           )
