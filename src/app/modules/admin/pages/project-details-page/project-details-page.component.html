@@ -38,6 +38,45 @@
       </div>
       <div class="row mt-3 mb-2">
         <div class="col">
+          <span>Investores</span>
+        </div>
+      </div>
+      <div class="row my-5">
+        <div class="col-8 offset-2">
+          <is-grid [value]="buisness?.users">
+            <is-grid-column
+              field="first_name"
+              header="First Name"
+              styleClass="text-dark"
+            >
+              <ng-template let-user="rowData" isGridTemplate="body">
+                <span>{{ user?.first_name }}</span>
+              </ng-template>
+            </is-grid-column>
+            <is-grid-column
+              field="last_name"
+              header="Last Name"
+              styleClass="text-dark"
+            >
+              <ng-template let-user="rowData" isGridTemplate="body">
+                <span>{{ user?.last_name }}</span>
+              </ng-template>
+            </is-grid-column>
+            <is-grid-column field="phone" header="Phone" styleClass="text-dark">
+              <ng-template let-user="rowData" isGridTemplate="body">
+                <span>{{ user?.phone }}</span>
+              </ng-template>
+            </is-grid-column>
+            <is-grid-column field="email" header="Email" styleClass="text-dark">
+              <ng-template let-user="rowData" isGridTemplate="body">
+                <span>{{ user?.email }}</span>
+              </ng-template>
+            </is-grid-column>
+          </is-grid>
+        </div>
+      </div>
+      <div class="row mt-3 mb-2">
+        <div class="col">
           <span>Project Images</span>
         </div>
       </div>

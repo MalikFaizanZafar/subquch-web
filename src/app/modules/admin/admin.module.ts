@@ -1,17 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AgmCoreModule } from '@agm/core';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { AdminLayoutComponent } from './layout/admin-layout.component';
-import { FranchiseSalesService } from './services/franchiseSales.service';
-import { GoogleMapService } from '@app/shared/services/google-map.service';
-import { environment } from 'environments/environment';
-import { UserAuthService } from '../auth/services/auth.service';
-import { FranchisesService } from './services/franchises.service';
-import { NgxEchartsModule } from 'ngx-echarts';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
@@ -21,29 +13,17 @@ import { BuisnessService } from './services/buisness.service';
 import { NewProjectPageComponent } from './pages/new-project-page/new-project-page.component';
 import { ProjectDetailsPageComponent } from './pages/project-details-page/project-details-page.component';
 import { EditProjectPageComponent } from './pages/edit-project-page/edit-project-page.component';
-import { SliderService } from './services/image-slider.service';
 
 
 @NgModule({
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule,
-    AgmCoreModule.forRoot({
-      apiKey: "AIzaSyB-EsaismaaJDTBDg0F2l-28Z-7zsVCTWU ",
-      libraries: ["places"]
-    }),
-    InfiniteScrollModule,
-    NgxEchartsModule
+    SharedModule
   ],
   providers: [
     AdminAuthService,
-    BuisnessService,
-    // SliderService,
-    FranchiseSalesService,
-    GoogleMapService,
-    UserAuthService,
-    FranchisesService,
+    BuisnessService
   ],
   declarations: [ 
     AdminLayoutComponent,

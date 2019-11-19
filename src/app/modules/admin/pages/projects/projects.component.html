@@ -30,19 +30,29 @@
             </select>
           </div> -->
           <div class="d-flex align-items-center">
-              <input
-                type="tesxt"
-                class="form-control"
-                style="height:35px;"
-                placeholder="Enter Project Name"
-                (keyup)="onSearchKeyUp($event)"
-                
-              />
+            <input
+              type="tesxt"
+              class="form-control"
+              style="height:35px;"
+              placeholder="Enter Project Name"
+              (keyup)="onSearchKeyUp($event)"
+            />
           </div>
-          <button class="ml-2" is-button #searchBtn type="button" (click)="onSearchProjectHandler(searchBtn)">
+          <button
+            class="ml-2"
+            is-button
+            #searchBtn
+            type="button"
+            (click)="onSearchProjectHandler(searchBtn)"
+          >
             Search
           </button>
-          <button class="ml-2" is-button type="button" (click)="onAddProjectHandler()">
+          <button
+            class="ml-2"
+            is-button
+            type="button"
+            (click)="onAddProjectHandler()"
+          >
             Add New
           </button>
         </div>
@@ -88,11 +98,35 @@
               <span>{{ buisness.totalWorth }}</span>
             </ng-template>
           </is-grid-column>
+          <is-grid-column
+            field="isActive"
+            header="active"
+            styleClass="grid__active"
+          >
+            <ng-template let-buisness="rowData" isGridTemplate="body">
+              <is-slide-toggle
+                container="body"
+                placement="left"
+                [(ngModel)]="buisness.enabled"
+                (change)="onActivateClick(buisness)"
+              >
+              </is-slide-toggle>
+            </ng-template>
+          </is-grid-column>
           <is-grid-column header="Actions" styleClass="text-dark">
             <ng-template let-buisness="rowData" isGridTemplate="body">
-              <i class="fa fa-eye text-info mr-2 fa-2x" (click)="onViewProjectHandler(buisness.id)"></i>
-              <i class="fa fa-edit text-warn mr-2 fa-2x" (click)="onEditProjectHandler(buisness.id)"></i>
-              <i class="fa fa-trash text-danger mr-2 fa-2x" (click)="onDeleteProjectHandler(buisness.id)"></i>
+              <i
+                class="fa fa-eye text-info mr-2 fa-2x"
+                (click)="onViewProjectHandler(buisness.id)"
+              ></i>
+              <i
+                class="fa fa-edit text-warn mr-2 fa-2x"
+                (click)="onEditProjectHandler(buisness.id)"
+              ></i>
+              <!-- <i
+                class="fa fa-trash text-danger mr-2 fa-2x"
+                (click)="onDeleteProjectHandler(buisness.id)"
+              ></i> -->
             </ng-template>
           </is-grid-column>
         </is-grid>
