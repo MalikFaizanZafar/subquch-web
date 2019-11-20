@@ -10,13 +10,18 @@ import { BuisnessModel } from '../../models/buisness.model';
 })
 export class ProjectDetailsPageComponent implements OnInit {
   buisness: BuisnessModel;
+  buisnessUsers = [];
   constructor(private buisnessService : BuisnessService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.buisnessService.getBuisness(params['id']).subscribe(res => {
         this.buisness = res;
-        console.log("this.buisness : ", this.buisness)
+        console.log("this.buisness : ", this.buisness);
+        this.buisnessService.getBuisnessUsers(params['id']).subscribe(res2 => {
+          this.buisnessUsers = res2;
+          console.log("this.buisnessUsers : ", this.buisnessUsers);
+        })
       })
     })
   }

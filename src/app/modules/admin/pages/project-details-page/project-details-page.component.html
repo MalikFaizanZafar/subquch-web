@@ -42,34 +42,44 @@
         </div>
       </div>
       <div class="row my-5">
-        <div class="col-8 offset-2">
-          <is-grid [value]="buisness?.users">
+        <div class="col-12">
+          <is-grid [value]="buisnessUsers">
             <is-grid-column
-              field="first_name"
+              field="user.firstName"
               header="First Name"
               styleClass="text-dark"
             >
-              <ng-template let-user="rowData" isGridTemplate="body">
-                <span>{{ user?.first_name }}</span>
+              <ng-template let-buisnessUser="rowData" isGridTemplate="body">
+                <span>{{ buisnessUser?.user.firstName }}</span>
               </ng-template>
             </is-grid-column>
             <is-grid-column
-              field="last_name"
+              field="user.lastName"
               header="Last Name"
               styleClass="text-dark"
             >
-              <ng-template let-user="rowData" isGridTemplate="body">
-                <span>{{ user?.last_name }}</span>
+              <ng-template let-buisnessUser="rowData" isGridTemplate="body">
+                <span>{{ buisnessUser?.user.lastName }}</span>
               </ng-template>
             </is-grid-column>
             <is-grid-column field="phone" header="Phone" styleClass="text-dark">
-              <ng-template let-user="rowData" isGridTemplate="body">
-                <span>{{ user?.phone }}</span>
+              <ng-template let-buisnessUser="rowData" isGridTemplate="body">
+                <span>{{ buisnessUser?.user.phone }}</span>
               </ng-template>
             </is-grid-column>
             <is-grid-column field="email" header="Email" styleClass="text-dark">
-              <ng-template let-user="rowData" isGridTemplate="body">
-                <span>{{ user?.email }}</span>
+              <ng-template let-buisnessUser="rowData" isGridTemplate="body">
+                <span>{{ buisnessUser?.user.email }}</span>
+              </ng-template>
+            </is-grid-column>
+            <is-grid-column field="monthly_investment" header="Monthly Investment" styleClass="text-dark">
+              <ng-template let-buisnessUser="rowData" isGridTemplate="body">
+                <span>{{ buisnessUser?.monthly_investment }}</span>
+              </ng-template>
+            </is-grid-column>
+            <is-grid-column field="yearly_investment" header="Yearly Investment" styleClass="text-dark">
+              <ng-template let-buisnessUser="rowData" isGridTemplate="body">
+                <span>{{ buisnessUser?.yearly_investment }}</span>
               </ng-template>
             </is-grid-column>
           </is-grid>

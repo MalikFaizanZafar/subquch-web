@@ -58,6 +58,15 @@ export class BuisnessService {
     });
   }
 
+  getBuisnessUsers(id: number): Observable<any>{
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem("Authorization");
+    headers = headers.append("Authorization", token);
+    return this.http.get<any>(`${this.baseURL}/users/buisness-users/${id}`, {
+      headers
+    });
+  }
+  
   editBuisness(buisness: BuisnessModel, id: number): Observable<any> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem("Authorization");
