@@ -41,8 +41,11 @@
           <span>Investores</span>
         </div>
       </div>
-      <div class="row my-5">
-        <div class="col-12">
+      <div class="row mb-5">
+        <div class="col-2 offset-10 mt-1 mb-3">
+          <button class="btn btn-success" (click)="addInvestorHandler()">Add Investor</button>
+        </div>
+        <div class="col-8 offset-2 mb-5">
           <is-grid [value]="buisnessUsers">
             <is-grid-column
               field="user.firstName"
@@ -72,14 +75,19 @@
                 <span>{{ buisnessUser?.user.email }}</span>
               </ng-template>
             </is-grid-column>
-            <is-grid-column field="monthly_investment" header="Monthly Investment" styleClass="text-dark">
+            <!-- <is-grid-column field="monthly_investment" header="Monthly Investment" styleClass="text-dark">
               <ng-template let-buisnessUser="rowData" isGridTemplate="body">
                 <span>{{ buisnessUser?.monthly_investment }}</span>
               </ng-template>
-            </is-grid-column>
-            <is-grid-column field="yearly_investment" header="Yearly Investment" styleClass="text-dark">
+            </is-grid-column> -->
+            <is-grid-column field="yearly_investment" header="Investment" styleClass="text-dark">
               <ng-template let-buisnessUser="rowData" isGridTemplate="body">
                 <span>{{ buisnessUser?.yearly_investment }}</span>
+              </ng-template>
+            </is-grid-column>
+            <is-grid-column  header="Share" styleClass="text-dark">
+              <ng-template let-buisnessUser="rowData" isGridTemplate="body">
+                <span>{{ (buisnessUser?.yearly_investment / buisness?.totalWorth)*100 }}%</span>
               </ng-template>
             </is-grid-column>
           </is-grid>

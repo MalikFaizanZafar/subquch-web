@@ -1,0 +1,41 @@
+<is-card>
+  <is-card-header
+    class="d-flex justify-content-between w-100 align-items-center"
+  >
+    Add Investor
+  </is-card-header>
+
+  <is-card-content>
+    <div class="container">
+      <form [formGroup]="investorForm"
+      (ngSubmit)="onInvestorFormSubmit(saveBtn)">
+        <div class="row">
+          <div class="col">
+            <label for="exampleFormControlFile1">Users</label>
+            <select class="form-control" formControlName="user" >
+              <option *ngFor="let user of users" [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
+              <!-- <option>User 1</option>
+              <option>User 2</option> -->
+            </select>
+          </div>
+          <div class="col">
+              <label for="exampleFormControlFile1">Investment</label>
+              <input formControlName="investment" [max]="maxInvestment" type="number" class="form-control" id="exampleFormControlFile1">
+          </div>
+        </div>
+        <div class="row my-2">
+            <div class="col-2 offset-10 d-flex justify-content-center">
+              <button
+                class=" btn-success btn btn-primary"
+                style="width:200px;"
+                type="submit"
+                #saveBtn
+              >
+                Save
+              </button>
+            </div>
+          </div>
+      </form>
+    </div>
+  </is-card-content>
+</is-card>

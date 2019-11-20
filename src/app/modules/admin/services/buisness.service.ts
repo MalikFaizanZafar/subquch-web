@@ -67,6 +67,14 @@ export class BuisnessService {
     });
   }
   
+  setBuisnessUser(id: number, investor: any): Observable<any>{
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem("Authorization");
+    headers = headers.append("Authorization", token);
+    return this.http.post<any>(`${this.baseURL}/users/set-buisness-user/${id}`, investor, {
+      headers
+    });
+  }
   editBuisness(buisness: BuisnessModel, id: number): Observable<any> {
     let headers = new HttpHeaders();
     const token = localStorage.getItem("Authorization");
