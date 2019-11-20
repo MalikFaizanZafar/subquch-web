@@ -31,14 +31,15 @@ export class ProjectDetailsPageComponent implements OnInit {
   }
 
   addInvestorHandler(){
+    let maxI = this.buisness.totalWorth - this.buisnessUsers.map(o=>o.yearly_investment).reduce((a,c)=>a+c);
+    console.log("maxI : ", maxI)
     this.userService.getAllUsers().subscribe(res => {
       this.users = res;
       let addInvestorDialog = this.isModalService.open(AddInvestorDialogComponent,{
-        size: IsModalSize.Large, data: {users: this.users, maxInvestment: 40000}
+        size: IsModalSize.Large, data: {users: this.users, maxInvestment: maxI}
       })
       addInvestorDialog.onClose.subscribe(res => {
         if(res){
-          console.log('investor ....... ', res.investor);
           this.buisnessService.setBuisnessUser(this.buisness.id, res.investor).subscribe(newInvestorRes => {
             console.log("newInvestor is : ", newInvestorRes)
           })
