@@ -23,6 +23,7 @@ import { AddBuisnessDialogComponent } from "./modules/admin/components/add-buisn
 import { DeleteBuisnessDialogComponent } from "./modules/admin/components/delete-buisness-dialog/delete-buisness-dialog.component";
 import { EditBuisnessDialogComponent } from "./modules/admin/components/edit-buisness-dialog/edit-buisness-dialog.component";
 import { AddInvestorDialogComponent } from "./modules/admin/components/add-investor-dialog/add-investor-dialog.component";
+import { DeleteInvestorDialogComponent } from "./modules/admin/components/delete-investor-dialog/delete-investor-dialog.component";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AddInvestorDialogComponent } from "./modules/admin/components/add-inves
     AddBuisnessDialogComponent,
     EditBuisnessDialogComponent,
     DeleteBuisnessDialogComponent,
-    AddInvestorDialogComponent
+    AddInvestorDialogComponent,
+    DeleteInvestorDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -62,6 +64,6 @@ import { AddInvestorDialogComponent } from "./modules/admin/components/add-inves
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AddBuisnessDialogComponent,EditBuisnessDialogComponent, DeleteBuisnessDialogComponent, AddInvestorDialogComponent]
+    AddBuisnessDialogComponent,EditBuisnessDialogComponent, DeleteBuisnessDialogComponent, AddInvestorDialogComponent, DeleteInvestorDialogComponent]
 })
 export class AppModule {}

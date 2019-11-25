@@ -5,6 +5,7 @@ import { BuisnessModel } from '../../models/buisness.model';
 import { IsModalService, IsModalSize } from 'app/lib';
 import { AddInvestorDialogComponent } from '../../components/add-investor-dialog/add-investor-dialog.component';
 import { AdminAuthService } from '../../services/admin-auth.service';
+import { DeleteInvestorDialogComponent } from '../../components/delete-investor-dialog/delete-investor-dialog.component';
 
 @Component({
   selector: 'project-details-page',
@@ -45,6 +46,23 @@ export class ProjectDetailsPageComponent implements OnInit {
           })
         }
       })
+    })
+  }
+
+  deleteInvestorHandler(id:number){
+    let deleteInvestorDialog = this.isModalService.open(DeleteInvestorDialogComponent);
+    deleteInvestorDialog.onClose.subscribe(res => {
+      if(res == 'yes'){
+        this.buisnessService.deleteBuisnessUser(id).subscribe(res => {
+          console.log("res : ", res);
+          this.buisnessService.getBuisnessUsers(this.buisness.id).subscribe(res2 => {
+            this.buisnessUsers = res2;
+            console.log("this.buisnessUsers : ", this.buisnessUsers);
+          })
+        })
+      }else {
+        return;
+      }
     })
   }
 

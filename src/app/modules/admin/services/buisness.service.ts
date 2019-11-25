@@ -67,6 +67,15 @@ export class BuisnessService {
     });
   }
   
+  deleteBuisnessUser(id: number): Observable<any>{
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem("Authorization");
+    headers = headers.append("Authorization", token);
+    return this.http.delete<any>(`${this.baseURL}/users/buisness-users/${id}`, {
+      headers
+    });
+  }
+
   setBuisnessUser(id: number, investor: any): Observable<any>{
     let headers = new HttpHeaders();
     const token = localStorage.getItem("Authorization");

@@ -69,4 +69,5 @@ export class ProjectsComponent implements OnInit {
   onEditProjectHandler(id: number) {
     this.router.navigate([id, "edit"], { relativeTo: this.currentRoute });
   }
+
 }

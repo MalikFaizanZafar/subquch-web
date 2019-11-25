@@ -90,6 +90,13 @@
                 <span>{{ (buisnessUser?.yearly_investment / buisness?.totalWorth)*100 }}%</span>
               </ng-template>
             </is-grid-column>
+            <is-grid-column  header="Actions" styleClass="text-dark">
+                <ng-template let-buisnessUser="rowData" isGridTemplate="body">
+                  <span>
+                    <i class="fa  fa-trash text-danger" (click)="deleteInvestorHandler(buisnessUser.id)"></i>
+                  </span>
+                </ng-template>
+              </is-grid-column>
           </is-grid>
         </div>
       </div>
