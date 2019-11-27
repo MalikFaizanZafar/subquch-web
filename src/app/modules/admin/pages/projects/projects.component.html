@@ -86,7 +86,7 @@
             styleClass="text-dark"
           >
             <ng-template let-buisness="rowData" isGridTemplate="body">
-              <span>{{ buisness.monthlyWorth }}</span>
+              <span>{{ buisness.monthlyWorth.toLocaleString('en')}}</span>
             </ng-template>
           </is-grid-column>
           <is-grid-column
@@ -95,7 +95,7 @@
             styleClass="text-dark"
           >
             <ng-template let-buisness="rowData" isGridTemplate="body">
-              <span>{{ buisness.totalWorth }}</span>
+              <span>{{ buisness.totalWorth.toLocaleString('en') }}</span>
             </ng-template>
           </is-grid-column>
           <is-grid-column
@@ -108,7 +108,7 @@
                 container="body"
                 placement="left"
                 [(ngModel)]="buisness.enabled"
-                (change)="onActivateClick(buisness)"
+                (change)="onActivateClick(buisness.id)"
               >
               </is-slide-toggle>
             </ng-template>
@@ -117,9 +117,11 @@
             <ng-template let-buisness="rowData" isGridTemplate="body">
               <i
                 class="fa fa-eye text-info mr-2 fa-2x"
+                style="cursor: pointer;"
                 (click)="onViewProjectHandler(buisness.id)"
               ></i>
               <i
+                style="cursor: pointer;"
                 class="fa fa-edit text-warn mr-2 fa-2x"
                 (click)="onEditProjectHandler(buisness.id)"
               ></i>

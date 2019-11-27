@@ -16,6 +16,10 @@ export class SliderService {
     return this.http.post<any>(`${this.baseURL}`, { images: imagesList });
   }
 
+  saveImage(image: string) {
+    return this.http.post<any>(`${this.baseURL}`, { image: image });
+  }
+
   getImages(){
     return this.http.get<any>(`${this.baseURL}`);
   }

@@ -52,6 +52,10 @@ export class ProjectsComponent implements OnInit {
     this.router.navigate([id, "view"], { relativeTo: this.currentRoute });
   }
 
+  onActivateClick(id: number){
+    this.onDeleteProjectHandler(id);
+  }
+
   onDeleteProjectHandler(id: number) {
     let deleteBuisnessDialog = this.isModalService.open(
       DeleteBuisnessDialogComponent

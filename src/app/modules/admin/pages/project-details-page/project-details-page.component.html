@@ -4,48 +4,48 @@
       <h3 class="text-center">Project Details</h3>
       <div class="row mt-5 mb-3">
         <div class="col">
-          <span>
+          <span class="project-prop">
             Project Name :
           </span>
-          <span>
+          <span class="project-val">
             {{ buisness?.title || "Project Name" }}
           </span>
         </div>
         <div class="col">
-          <span>
+          <span class="project-prop">
             Total Worth :
           </span>
-          <span>
-            {{ buisness?.totalWorth || 4000000 }}
+          <span class="project-val">
+            {{ buisness?.totalWorth.toLocaleString('en') || 4000000 }}
           </span>
         </div>
       </div>
       <div class="row my-3">
         <div class="col">
-          <span>Disclaimer</span>
-          <p>
+          <span class="project-prop">Disclaimer</span>
+          <p class="project-val">
             {{ buisness?.disclaimer || "This is disclaimer" }}
           </p>
         </div>
       </div>
       <div class="row my-3">
         <div class="col">
-          <span>Details</span>
-          <p>
+          <span class="project-prop">Details</span>
+          <p class="project-val">
             {{ buisness?.detailDescription || "This is description" }}
           </p>
         </div>
       </div>
       <div class="row mt-3 mb-2">
         <div class="col">
-          <span>Investores</span>
+          <span class="project-prop">Investors</span>
         </div>
       </div>
       <div class="row mb-5">
         <div class="col-2 offset-10 mt-1 mb-3">
-          <button class="btn btn-success" (click)="addInvestorHandler()">Add Investor</button>
+          <button class="btn btn-success" is-button (click)="addInvestorHandler()">Add Investor</button>
         </div>
-        <div class="col-8 offset-2 mb-5">
+        <div class="col-10 offset-1 mb-5">
           <is-grid [value]="buisnessUsers">
             <is-grid-column
               field="user.firstName"
@@ -82,7 +82,7 @@
             </is-grid-column> -->
             <is-grid-column field="yearly_investment" header="Investment" styleClass="text-dark">
               <ng-template let-buisnessUser="rowData" isGridTemplate="body">
-                <span>{{ buisnessUser?.yearly_investment }}</span>
+                <span>{{ buisnessUser?.yearly_investment.toLocaleString('en') }}</span>
               </ng-template>
             </is-grid-column>
             <is-grid-column  header="Share" styleClass="text-dark">
@@ -90,19 +90,53 @@
                 <span>{{ (buisnessUser?.yearly_investment / buisness?.totalWorth)*100 }}%</span>
               </ng-template>
             </is-grid-column>
-            <is-grid-column  header="Actions" styleClass="text-dark">
+            <is-grid-column  header="Actions" styleClass="text-dark text-center">
                 <ng-template let-buisnessUser="rowData" isGridTemplate="body">
                   <span>
-                    <i class="fa  fa-trash text-danger" (click)="deleteInvestorHandler(buisnessUser.id)"></i>
+                    <i style="cursor: pointer;" class="fa  fa-trash text-danger" (click)="deleteInvestorHandler(buisnessUser.id)"></i>
                   </span>
                 </ng-template>
               </is-grid-column>
           </is-grid>
         </div>
       </div>
+      <div class="row my-2">
+        <div class="col-2 offset-10">
+          <button is-button class="btn btn-primary">
+            Add Monthly Report
+          </button>
+        </div>
+      </div>
       <div class="row mt-3 mb-2">
         <div class="col">
-          <span>Project Images</span>
+          <span class="project-prop">Monthly Reports</span>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col-4 offset-4">
+          <is-grid [value]="monthlyReports">
+            <is-grid-column
+              field="uploadDate"
+              header="Date"
+              styleClass="text-dark"
+            >
+              <ng-template let-buisnessUser="rowData" isGridTemplate="body">
+                <span>{{ buisnessUser?.user.firstName }}</span>
+              </ng-template>
+            </is-grid-column>
+            <is-grid-column  header="Actions" styleClass="text-dark text-center">
+              <ng-template let-buisnessUser="rowData" isGridTemplate="body">
+                <span>
+                  <i style="cursor: pointer;" class="fa  fa-trash text-danger" (click)="deleteInvestorHandler(buisnessUser.id)"></i>
+                </span>
+              </ng-template>
+            </is-grid-column>
+            </is-grid>
+        </div>
+      </div>
+      <div class="row mt-3 mb-2">
+        <div class="col">
+          <span class="project-prop">Project Images</span>
         </div>
       </div>
       <div class="row mb-3">
@@ -117,6 +151,7 @@
           </div>
         </div>
       </div>
+     
     </div>
   </div>
 </div>

@@ -33,12 +33,12 @@
       </div>
       <div class="row my-2">
         <div class="col-12 d-flex justify-content-start">
-          <button class="btn btn-primary" (click)="onAddImage()">Add More</button>
+          <button class="btn btn-primary" is-button (click)="onAddImage()">Add More</button>
         </div>
       </div>
       <div class="row my-2">
         <div class="col-2 offset-10 d-flex justify-content-center">
-          <button [disabled]="addMoreBtnDisabled" class=" btn-success btn btn-primary" is-button #saveBtn style="width:200px;" (click)="onSaveHandler(saveBtn)" >Save</button>
+          <button  class="btn-success btn " is-button #saveBtn style="width:200px;" (click)="onSaveHandler(saveBtn)" >Save</button>
         </div>
       </div>
     </div>

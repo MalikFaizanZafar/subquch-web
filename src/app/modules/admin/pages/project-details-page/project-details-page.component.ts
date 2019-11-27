@@ -16,6 +16,7 @@ export class ProjectDetailsPageComponent implements OnInit {
   buisness: BuisnessModel;
   users = [];
   buisnessUsers = [];
+  monthlyReports = [];
   constructor(private buisnessService : BuisnessService, private userService: AdminAuthService, private route: ActivatedRoute, private isModalService: IsModalService) { }
 
   ngOnInit() {
@@ -32,7 +33,10 @@ export class ProjectDetailsPageComponent implements OnInit {
   }
 
   addInvestorHandler(){
-    let maxI = this.buisness.totalWorth - this.buisnessUsers.map(o=>o.yearly_investment).reduce((a,c)=>a+c);
+    let maxI = this.buisness.totalWorth;
+    if(this.buisnessUsers.length > 0){
+      maxI = this.buisness.totalWorth - this.buisnessUsers.map(o=>o.yearly_investment).reduce((a,c)=>a+c);
+    }
     console.log("maxI : ", maxI)
     this.userService.getAllUsers().subscribe(res => {
       this.users = res;
@@ -42,7 +46,9 @@ export class ProjectDetailsPageComponent implements OnInit {
       addInvestorDialog.onClose.subscribe(res => {
         if(res){
           this.buisnessService.setBuisnessUser(this.buisness.id, res.investor).subscribe(newInvestorRes => {
-            console.log("newInvestor is : ", newInvestorRes)
+            this.buisnessService.getBuisnessUsers(this.buisness.id).subscribe(res2 => {
+              this.buisnessUsers = res2;
+            })
           })
         }
       })

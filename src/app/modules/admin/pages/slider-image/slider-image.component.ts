@@ -24,7 +24,9 @@ export class SliderImageComponent implements OnInit {
       edited: false
     }
   ];
+  imagesPreviousLength: number;
   selectedIndex: number = null;
+  newImages: number = 0;
   addMoreBtnDisabled: boolean = true;
   downloadURL: Observable<string>;
   @ViewChild("imagePicker") imagePicker: ElementRef;
@@ -33,6 +35,7 @@ export class SliderImageComponent implements OnInit {
   ngOnInit() {
     this.sliderService.getImages().subscribe(res => {
       this.sliderImages = res.map(obj=> ({ ...obj, edited: false }));
+      this.imagesPreviousLength = this.sliderImages.length;
     })
   }
 
@@ -62,6 +65,7 @@ export class SliderImageComponent implements OnInit {
     }
   }
   onAddImage() {
+    this.newImages++;
     this.sliderImages.push({
       imageUrl: "http://silkbrassband.co.uk/images/no-image-selected.png",
       edited: false
@@ -76,8 +80,10 @@ export class SliderImageComponent implements OnInit {
   onSaveHandler(btn: IsButton) {
     btn.startLoading();
     let imagesList = []
+    console.log("this.sliderImages : ", this.sliderImages)
     this.sliderImages.map((image, i) => {
       if (image.file != undefined) {
+        console.log("iFFFFFFFFF")
         let randomString =
           Math.random()
             .toString(36)
@@ -86,7 +92,9 @@ export class SliderImageComponent implements OnInit {
             .toString(36)
             .substring(2, 15);
         const filePath = "slider-images/" + randomString + "-" + image.file.name;
+        console.log("filePath ", filePath)
         const fileRef = this.storage.ref(filePath);
+        console.log("fileRef ", fileRef)
         const task = this.storage.upload(filePath, image.file);
         task
           .snapshotChanges()
@@ -94,19 +102,18 @@ export class SliderImageComponent implements OnInit {
             finalize(() => {
               this.downloadURL = fileRef.getDownloadURL();
               this.downloadURL.subscribe(url => {
-                imagesList.push(url)
-                if(imagesList.length == this.sliderImages.length){
-                  this.sliderService.saveImages(imagesList).subscribe(imageRes => {
-                    console.log("imageRes : ", imageRes);
-                    this.sliderImages = imageRes.map(obj=> ({ ...obj, edited: false }));
-                    btn.stopLoading();
-                  })
-                }
+                console.log("url ......... ", url)
+                this.sliderService.saveImage(url).subscribe(res => {
+                  this.sliderImages[i] = {...res, edited: false};
+                })
               });
             })
           )
           .subscribe();
+      }else {
+        // btn.stopLoading()
       }
+      btn.stopLoading()
     });
   }
 }
