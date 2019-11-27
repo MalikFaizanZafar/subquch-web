@@ -102,7 +102,7 @@
       </div>
       <div class="row my-2">
         <div class="col-2 offset-10">
-          <button is-button class="btn btn-primary">
+          <button is-button class="btn btn-primary" (click)="addMonthlyReportHandler()">
             Add Monthly Report
           </button>
         </div>
@@ -114,20 +114,20 @@
       </div>
       <div class="row my-2">
         <div class="col-4 offset-4">
-          <is-grid [value]="monthlyReports">
+          <is-grid [value]="buisness?.reports">
             <is-grid-column
               field="uploadDate"
               header="Date"
               styleClass="text-dark"
             >
-              <ng-template let-buisnessUser="rowData" isGridTemplate="body">
-                <span>{{ buisnessUser?.user.firstName }}</span>
+              <ng-template let-report="rowData" isGridTemplate="body">
+                <span>{{ report?.uploadDate | date}}</span>
               </ng-template>
             </is-grid-column>
             <is-grid-column  header="Actions" styleClass="text-dark text-center">
-              <ng-template let-buisnessUser="rowData" isGridTemplate="body">
+              <ng-template let-report="rowData" isGridTemplate="body">
                 <span>
-                  <i style="cursor: pointer;" class="fa  fa-trash text-danger" (click)="deleteInvestorHandler(buisnessUser.id)"></i>
+                  <i style="cursor: pointer;" class="fa  fa-eye text-danger" (click)="viewReportHandler(report?.url)"></i>
                 </span>
               </ng-template>
             </is-grid-column>

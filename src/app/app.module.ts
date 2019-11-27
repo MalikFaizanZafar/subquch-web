@@ -24,6 +24,7 @@ import { DeleteBuisnessDialogComponent } from "./modules/admin/components/delete
 import { EditBuisnessDialogComponent } from "./modules/admin/components/edit-buisness-dialog/edit-buisness-dialog.component";
 import { AddInvestorDialogComponent } from "./modules/admin/components/add-investor-dialog/add-investor-dialog.component";
 import { DeleteInvestorDialogComponent } from "./modules/admin/components/delete-investor-dialog/delete-investor-dialog.component";
+import { AddMonthlyReportDialogComponent } from "./modules/admin/components/add-monthly-report-dialog/add-monthly-report-dialog.component";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DeleteInvestorDialogComponent } from "./modules/admin/components/delete
     EditBuisnessDialogComponent,
     DeleteBuisnessDialogComponent,
     AddInvestorDialogComponent,
-    DeleteInvestorDialogComponent
+    DeleteInvestorDialogComponent,
+    AddMonthlyReportDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -64,6 +66,6 @@ import { DeleteInvestorDialogComponent } from "./modules/admin/components/delete
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AddBuisnessDialogComponent,EditBuisnessDialogComponent, DeleteBuisnessDialogComponent, AddInvestorDialogComponent, DeleteInvestorDialogComponent]
+    AddBuisnessDialogComponent,EditBuisnessDialogComponent, DeleteBuisnessDialogComponent, AddInvestorDialogComponent, DeleteInvestorDialogComponent, AddMonthlyReportDialogComponent]
 })
 export class AppModule {}

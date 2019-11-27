@@ -58,6 +58,19 @@ export class BuisnessService {
     });
   }
 
+  addBuisnessReport(id: number , fileUrl : string): Observable<any> {
+    let headers = new HttpHeaders();
+    let report = {
+      uploadDate: new Date(),
+      url: fileUrl
+    }
+    const token = localStorage.getItem("Authorization");
+    headers = headers.append("Authorization", token);
+    return this.http.post<any>(`${this.baseURL}/buisness/${id}/report`, report, {
+      headers
+    });
+  }
+
   getBuisnessUsers(id: number): Observable<any>{
     let headers = new HttpHeaders();
     const token = localStorage.getItem("Authorization");
